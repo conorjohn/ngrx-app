@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {Observable, Subject} from "rxjs";
 import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/merge';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,12 @@ export class AppComponent {
   //   .map(() => new Date());
 
   constructor(){
-    this.clock = this.click$.map(() => new Date());
+    this.clock = Observable.merge(
+      this.click$,
+      Observable.interval(5000)
+    ).map(() => new Date());
+
+    // Observable.interval(1000);
+    // this.clock = this.click$.map(() => new Date());
   }
 }
