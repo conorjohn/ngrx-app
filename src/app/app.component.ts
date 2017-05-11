@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import 'rxjs/add/observable/interval';
 
 @Component({
@@ -8,8 +8,15 @@ import 'rxjs/add/observable/interval';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  //the dollar at the end of a var signifies 'subject'
+  click$ = new Subject();
+  clock;
+  // //Used In Template
+  // clock:Observable<any> = Observable
+  //   .interval(1000)
+  //   .map(() => new Date());
 
-  clock = Observable.interval(1000)
-    .map(() => new Date());
+  constructor(){
+    this.clock = this.click$.map(() => new Date());
+  }
 }
