@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'clock',
   template: `
-    I'm a clock
+    {{time}}
   `
 })
 
 export class ClockClass {
-
+  @Input() time;
 }

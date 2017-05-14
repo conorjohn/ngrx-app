@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { provideStore } from '@ngrx/store';
-import { clock } from '../reducers';
+import {clock, people} from '../reducers';
 import { AppComponent } from './app.component';
 import {ClockClass} from "./clock";
 
@@ -18,7 +18,7 @@ import {ClockClass} from "./clock";
     FormsModule,
     HttpModule
   ],
-  providers: [ provideStore({clock})],
+  providers: [ provideStore({clock, people})],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

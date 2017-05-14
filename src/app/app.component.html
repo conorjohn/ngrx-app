@@ -1,6 +1,15 @@
-<h1>
-  <input type="number" value="0" #inputNum>
-  <button (click)="click$.next(inputNum.value)">Update</button>
-  <!--{{clock | async}}-->
-  <clock></clock>
-</h1>
+<div>
+  <h1>
+    <input type="number" value="0" #inputNum>
+    <button (click)="click$.next(inputNum.value)">Update</button>
+    <!--{{clock | async}}-->
+    <clock [time]="time | async"></clock>
+  </h1>
+  <!--<ul>-->
+  hello
+    <div *ngFor="let person of people | async">
+      {{person.name}} is in {{person.time | date: 'jms'}}
+    </div>
+  <!--</ul>-->
+</div>
+

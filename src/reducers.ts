@@ -2,7 +2,7 @@ import {Observable} from "rxjs";
 export const HOUR = 'HOUR';
 export const SECOND = 'SECOND';
 
-export const clock = (state = new Date(), {type, payload}) => {
+export const clock = (state = new Date(), {type, payload} = {type:"", payload}) => {
   const date = new Date(state.getTime());
 
   switch (type){
@@ -13,7 +13,23 @@ export const clock = (state = new Date(), {type, payload}) => {
     case HOUR:
       date.setHours(date.getHours() + payload);
       return date;
-  }
 
-  return date;
+    default:
+      return state;
+  }
 };
+
+const defaultPeople = [
+  {name:'Sara', time: clock()},
+  {name:'John', time: ''},
+  {name:'Nancy', time: ''},
+  {name:'Drew', time: ''},
+];
+
+export const people = (state = defaultPeople, {type, payload}) => {
+  switch(type){
+
+    default:
+      return state;
+  }
+}
