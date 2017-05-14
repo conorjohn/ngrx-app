@@ -7,7 +7,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/mapTo';
 import { Store } from '@ngrx/store';
-import { SECOND, HOUR} from '../reducers';
+import { SECOND, HOUR, ADVANCE} from '../reducers';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +21,8 @@ export class AppComponent {
   seconds$ = Observable
     .interval(1000)
     .mapTo({type: SECOND, payload:3});
+  person$ = new Subject()
+    .map((value) => ({payload: value, type: ADVANCE}));
 
   time;
   people;
@@ -31,7 +33,8 @@ export class AppComponent {
 
     Observable.merge(
       this.click$,
-      this.seconds$
+      this.seconds$,
+      this.person$
     ).subscribe(store.dispatch.bind(store));
 
     // Observable.interval(1000);

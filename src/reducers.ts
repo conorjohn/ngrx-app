@@ -1,6 +1,7 @@
 import {Observable} from "rxjs";
 export const HOUR = 'HOUR';
 export const SECOND = 'SECOND';
+export const ADVANCE = 'ADVANCE';
 
 export const clock = (state = new Date(), {type, payload} = {type:"", payload}) => {
   const date = new Date(state.getTime());
@@ -21,14 +22,23 @@ export const clock = (state = new Date(), {type, payload} = {type:"", payload}) 
 
 const defaultPeople = [
   {name:'Sara', time: clock()},
-  {name:'John', time: ''},
-  {name:'Nancy', time: ''},
-  {name:'Drew', time: ''},
+  {name:'John', time: clock()},
+  {name:'Nancy', time: clock()},
+  {name:'Drew', time: clock()}
 ];
 
 export const people = (state = defaultPeople, {type, payload}) => {
   switch(type){
-
+    case ADVANCE:
+      return state.map((person)=>{
+        if(payload === person){
+          return {
+            name:person.name,
+            time:clock(person.time, {type:HOUR, payload:6})
+          }
+        }
+        return person;
+      })
     default:
       return state;
   }
