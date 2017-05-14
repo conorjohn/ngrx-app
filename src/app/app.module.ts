@@ -6,6 +6,7 @@ import { provideStore } from '@ngrx/store';
 import { clock } from '../reducers';
 import { AppComponent } from './app.component';
 
+
 @NgModule({
   declarations: [
     AppComponent
