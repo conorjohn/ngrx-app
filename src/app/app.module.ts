@@ -5,21 +5,20 @@ import { HttpModule } from '@angular/http';
 import { provideStore } from '@ngrx/store';
 import { clock } from '../reducers';
 import { AppComponent } from './app.component';
+import {ClockClass} from "./clock";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ClockClass
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule
   ],
-  providers: [ provideStore({clock}).then(
-    () => console.log('App running...'),
-    err => console.log(err)
-  )],
+  providers: [ provideStore({clock})],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

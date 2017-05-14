@@ -22,10 +22,10 @@ export class AppComponent {
     .interval(1000)
     .mapTo({type: SECOND, payload:3});
 
-  clock:any;
+  time;
 
   constructor(store: Store<any>){
-    this.clock = store.select('clock');
+    this.time = store.select('clock');
 
     Observable.merge(
       this.click$,

@@ -1,7 +1,8 @@
+import {Observable} from "rxjs";
 export const HOUR = 'HOUR';
 export const SECOND = 'SECOND';
 
-export const clock = (state = new Date(), {type, payload})=> {
+export const clock = (state = new Date(), {type, payload}) => {
   const date = new Date(state.getTime());
 
   switch (type){
