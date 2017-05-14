@@ -7,6 +7,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/mapTo';
 import { Store } from '@ngrx/store';
+import { SECOND, HOUR} from '../reducers';
 
 @Component({
   selector: 'app-root',
@@ -17,18 +18,14 @@ export class AppComponent {
   //the dollar at the end of a var signifies 'subject'
   click$ = new Subject<any>();
   clock:any;
-  // //Used In Template
-  // clock:Observable<any> = Observable
-  //   .interval(1000)
-  //   .map(() => new Date());
 
   constructor(store: Store<any>){
     this.clock = store.select('clock');
     Observable.merge(
-      this.click$.mapTo('hour'),
-      Observable.interval(1000).mapTo('second')
-    ).subscribe((type) => {
-      store.dispatch({type})
+      this.click$.mapTo({type:HOUR, payload:1}),
+      Observable.interval(1000).mapTo({type:SECOND, payload:1})
+    ).subscribe((action) => {
+      store.dispatch(action)
     })
 
     // Observable.interval(1000);
