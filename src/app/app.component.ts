@@ -15,18 +15,22 @@ import { SECOND, HOUR} from '../reducers';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //the dollar at the end of a var signifies 'subject'
-  click$ = new Subject<any>();
+  //the dollar at the end of a var signifies 'subject' or observable type
+  click$ = new Subject<any>()
+    .map((value) => ({type:HOUR, payload:parseInt(value)}));
+  seconds$ = Observable
+    .interval(1000)
+    .mapTo({type: SECOND, payload:3});
+
   clock:any;
 
   constructor(store: Store<any>){
     this.clock = store.select('clock');
+
     Observable.merge(
-      this.click$.mapTo({type:HOUR, payload:1}),
-      Observable.interval(1000).mapTo({type:SECOND, payload:1})
-    ).subscribe((action) => {
-      store.dispatch(action)
-    })
+      this.click$,
+      this.seconds$
+    ).subscribe(store.dispatch.bind(store));
 
     // Observable.interval(1000);
     // this.clock = this.click$.map(() => new Date());
